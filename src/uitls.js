@@ -1,4 +1,4 @@
-export const emptyTodo = { completed: false, text: "" };
+export const emptyTodo = { completed: false, text: "", editing: false };
 
 export const saveTodo = (toSave) => {
   localStorage.setItem("todos", JSON.stringify(toSave));

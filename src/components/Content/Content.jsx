@@ -18,9 +18,13 @@ export default function Content({ appStyles }) {
       <InputTodo appStyles={appStyles} setTodos={setTodos} />
       <span className={appStyles.hr} />
       <ul className={appStyles.todos}>
-        {todos.map((todo) => (
-          <Todo key={todo.text} appStyles={appStyles} text={todo.text} />
-        ))}
+        {todos.length > 0 ? (
+          todos.map((todo) => (
+            <Todo key={todo.text} appStyles={appStyles} text={todo.text} />
+          ))
+        ) : (
+          <div className={appStyles.emptyTodos}>Empty todos</div>
+        )}
       </ul>
     </div>
   );

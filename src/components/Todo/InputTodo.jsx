@@ -10,6 +10,8 @@ export function InputTodo({ appStyles, setTodos }) {
   };
 
   const handleSave = () => {
+    if (!inputTodo.text.trim()) return;
+
     if (!getTodos()) {
       saveTodo([inputTodo]);
       setInputTodo(emptyTodo);
