@@ -1,16 +1,5 @@
 import { Edit, Complete, Remove } from "../SVG";
 
-export function InputTodo({ appStyles }) {
-  const { newTodo, input, save } = appStyles;
-
-  return (
-    <div className={newTodo}>
-      <input type="text" className={input} placeholder="Write todo..." />
-      <button className={save}>save</button>
-    </div>
-  );
-}
-
 export function Todo({ appStyles, text }) {
   return (
     <li className={appStyles.todo}>
