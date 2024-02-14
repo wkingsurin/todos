@@ -113,6 +113,9 @@
   display: flex;
   align-items: center;
 }
+.textBlock > *:not(:last-child) {
+  padding-right: 5px;
+}
 .text {
   font-size: 18px;
   padding: var(--cor-txt-t);
@@ -126,19 +129,26 @@
 
   width: 20px;
   height: 20px;
-  margin-left: 5px;
+
+  opacity: 0;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.text:hover ~ .textEdit {
+  opacity: 1;
+}
+.textEdit:hover {
+  opacity: 1;
 }
 .textEdit svg {
   width: 15px;
   height: 15px;
-
-  cursor: pointer;
 }
 .textEdit g {
   fill: var(--main-b22);
   transition: 0.2s ease-in-out;
 }
-.textEdit svg:hover g {
+.textEdit:hover g {
   fill: var(--main-b);
 }
 
