@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { emptyTodo, saveTodo, getTodos } from "../../uitls";
+import { emptyTodo, saveTodo, getTodos, isEmptyTodos } from "../../uitls";
 
 export function InputTodo({ appStyles, setTodos }) {
   const { newTodo, input, save } = appStyles;
@@ -12,7 +12,7 @@ export function InputTodo({ appStyles, setTodos }) {
   const handleSave = () => {
     if (!inputTodo.text.trim()) return;
 
-    if (!getTodos()) {
+    if (isEmptyTodos()) {
       saveTodo([inputTodo]);
       setInputTodo(emptyTodo);
       setTodos(getTodos());

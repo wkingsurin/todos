@@ -12,6 +12,10 @@ export default function Content({ appStyles }) {
     }
   }, []);
 
+  const todosList = todos.map((todo) => (
+    <Todo key={todo.text} appStyles={appStyles} text={todo.text} />
+  ));
+
   return (
     <div className={appStyles.content}>
       <h2 className={appStyles.logo}>todos</h2>
@@ -19,9 +23,7 @@ export default function Content({ appStyles }) {
       <span className={appStyles.hr} />
       <ul className={appStyles.todos}>
         {todos.length > 0 ? (
-          todos.map((todo) => (
-            <Todo key={todo.text} appStyles={appStyles} text={todo.text} />
-          ))
+          todosList
         ) : (
           <div className={appStyles.emptyTodos}>Empty todos</div>
         )}

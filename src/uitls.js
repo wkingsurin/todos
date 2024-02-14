@@ -7,3 +7,7 @@ export const saveTodo = (toSave) => {
 export const getTodos = () => {
   return JSON.parse(localStorage.getItem("todos"));
 };
+
+export const isEmptyTodos = () => {
+  return !getTodos();
+};
