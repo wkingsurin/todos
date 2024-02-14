@@ -1,13 +1,10 @@
 import { Todo } from "../Todo/Todo";
 import { InputTodo } from "../Todo/InputTodo";
 import { useState, useEffect } from "react";
+import { getTodos } from "../../uitls";
 
 export default function Content({ appStyles }) {
   const [todos, setTodos] = useState([]);
-
-  function getTodos() {
-    return JSON.parse(localStorage.getItem("todos"));
-  }
 
   useEffect(() => {
     if (getTodos()) {

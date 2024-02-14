@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { emptyTodo, saveTodo, getTodos } from "../../uitls";
 
 export function InputTodo({ appStyles, setTodos }) {
   const { newTodo, input, save } = appStyles;
-  const [inputTodo, setInputTodo] = useState({ completed: false, text: "" });
+  const [inputTodo, setInputTodo] = useState(emptyTodo);
 
   const handleInput = (e) => {
     setInputTodo(() => ({ ...inputTodo, text: e.target.value }));
@@ -11,22 +12,14 @@ export function InputTodo({ appStyles, setTodos }) {
   const handleSave = () => {
     if (!getTodos()) {
       saveTodo([inputTodo]);
-      setInputTodo(() => ({ completed: false, text: "" }));
+      setInputTodo(emptyTodo);
       setTodos(getTodos());
     } else {
       saveTodo([...getTodos(), inputTodo]);
-      setInputTodo(() => ({ completed: false, text: "" }));
+      setInputTodo(emptyTodo);
       setTodos(getTodos());
     }
   };
-
-  function saveTodo(toSave) {
-    localStorage.setItem("todos", JSON.stringify(toSave));
-  }
-
-  function getTodos() {
-    return JSON.parse(localStorage.getItem("todos"));
-  }
 
   return (
     <div className={newTodo}>
