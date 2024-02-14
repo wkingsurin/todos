@@ -1,0 +1,186 @@
+.container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: content-box;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 70px 0;
+  box-sizing: border-box;
+}
+.logo {
+  font-size: 44px;
+  font-family: "Joti One";
+
+  margin: 0;
+  margin-bottom: 40px;
+
+  color: var(--main-b);
+  text-transform: uppercase;
+}
+.newTodo {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+.newTodo > *:not(:last-child) {
+  margin-right: 20px;
+}
+.input {
+  flex: 1 1 100%;
+
+  width: 100%;
+  height: 40px;
+
+  border: none;
+  outline: none;
+
+  padding: 0 15px 4px 15px;
+  border-radius: var(--rad7);
+
+  color: var(--main-b);
+  border: var(--bord);
+  outline: 1px solid transparent;
+
+  background: transparent;
+  transition: 0.2s ease-in-out;
+}
+.input:focus {
+  outline-color: var(--main-b);
+  border-color: var(--main-b);
+}
+::placeholder {
+  color: var(--main-b22);
+}
+.save {
+  flex: 0 0 120px;
+
+  border: none;
+  outline: none;
+  color: var(--main-b);
+  border: var(--bord);
+  background: transparent;
+  letter-spacing: var(--ls);
+
+  padding: var(--cor-txt-b);
+  border-radius: var(--rad7);
+  cursor: pointer;
+
+  transition: 0.2s ease-in-out;
+}
+.save:hover {
+  border-color: transparent;
+  color: var(--main-w);
+  background: var(--main-b);
+}
+.hr {
+  display: block;
+
+  width: 100%;
+  height: 1px;
+
+  margin: 15px 0;
+  background: var(--main-b22);
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  color: var(--main-b);
+
+  margin: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+.todos > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+.todo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.textBlock {
+  display: flex;
+  align-items: center;
+}
+.text {
+  font-size: 18px;
+  padding: var(--cor-txt-t);
+  margin: 0;
+  box-sizing: border-box;
+}
+.textEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+.textEdit svg {
+  width: 15px;
+  height: 15px;
+
+  cursor: pointer;
+}
+.textEdit g {
+  fill: var(--main-b22);
+  transition: 0.2s ease-in-out;
+}
+.textEdit svg:hover g {
+  fill: var(--main-b);
+}
+
+.interaction {
+  display: flex;
+}
+.interaction > *:not(:last-child) {
+  margin-right: 15px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+.complete {
+}
+.complete g {
+  transition: 0.2s ease-in-out;
+}
+.complete:hover g {
+  fill: var(--bord-color);
+}
+.remove {
+}
+.remove g {
+  transition: 0.2s ease-in-out;
+}
+.remove:hover g {
+  fill: var(--remove);
+}

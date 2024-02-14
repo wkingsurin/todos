@@ -1,13 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Joti+One&display=swap");
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --main-b: #212121;
+  --main-b22: rgba(33, 33, 33, 0.22);
+  --main-w: #fdfdff;
+  --rad7: 7px;
+  --bord: 1px solid var(--main-b22);
+  --cor-txt-t: 2px 0 0 0;
+  --cor-txt-b: 0 0 4px 0;
+  --bord-color: #85cb33;
+  --ls: 0.75px;
+  --remove: #e85d5d;
+
+  font-family: Jost, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--main-w);
+  background-color: var(--main-w);
+  letter-spacing: 0.12px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
