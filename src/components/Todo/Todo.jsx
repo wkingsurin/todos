@@ -11,6 +11,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
       let nextTodo = {
         ...todo,
         completed: { ...todo.completed, status: true },
+        editing: false,
       };
       const nextTodos = getTodos().map((t) =>
         t.id == nextTodo.id ? nextTodo : t

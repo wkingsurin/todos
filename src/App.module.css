@@ -124,15 +124,17 @@
 .textBlock {
   display: flex;
   align-items: center;
+  max-width: 613px;
 }
 .textBlock > *:not(:last-child) {
   padding-right: 5px;
 }
 .text {
   font-size: 18px;
-  padding: var(--cor-txt-t);
+
   margin: 0;
   box-sizing: border-box;
+  padding: var(--cor-txt-t);
 
   color: inherit;
   border: none;
@@ -145,7 +147,9 @@
   justify-content: center;
 
   width: 20px;
+  min-width: 20px;
   height: 20px;
+  min-height: 20px;
 
   opacity: 0;
   cursor: pointer;
@@ -168,6 +172,9 @@
 
 .interaction {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 105px;
 }
 .interaction > *:not(:last-child) {
   margin-right: 15px;
