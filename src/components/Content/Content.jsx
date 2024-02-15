@@ -13,7 +13,12 @@ export default function Content({ appStyles }) {
   }, []);
 
   const todosList = todos.map((todo) => (
-    <Todo key={todo.text} appStyles={appStyles} text={todo.text} />
+    <Todo
+      key={todo.text}
+      appStyles={appStyles}
+      text={todo.text}
+      setTodos={setTodos}
+    />
   ));
 
   return (

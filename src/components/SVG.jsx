@@ -56,7 +56,7 @@ export function Complete() {
   );
 }
 
-export function Remove() {
+export function Delete() {
   return (
     <svg
       version="1.0"
