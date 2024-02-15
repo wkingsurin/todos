@@ -6,8 +6,6 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
   const [todo, setTodo] = useState(initialTodo);
   const textRef = useRef(null);
 
-  console.log("render Todo");
-
   const handleComplete = () => {
     setTodo((todo) => {
       let nextTodo = {
@@ -24,7 +22,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
   };
 
   const handleDelete = () => {
-    const nextTodos = getTodos().filter((t) => t.text !== todo.text);
+    const nextTodos = getTodos().filter((t) => t.id !== todo.id);
     setTodos(nextTodos);
     saveTodo(nextTodos);
   };
@@ -34,7 +32,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
       let nextTodo = {
         ...todo,
         editing: !todo.editing,
-        text: textRef.current.innerHTML,
+        text: textRef.current.textContent.trim(),
       };
       const filteredTodos = getTodos().map((t) => {
         return t.id === nextTodo.id ? nextTodo : t;
@@ -45,6 +43,22 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
       return nextTodo;
     });
   };
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
+      setTodo((todo) => {
+        let nextTodo = {
+          ...todo,
+          editing: false,
+          text: textRef.current.textContent.trim(),
+        };
+        const filteredTodos = getTodos().filter((t) => t.id !== nextTodo.id);
+        const nextTodos = [...filteredTodos, nextTodo];
+        saveTodo(nextTodos);
+        return nextTodo;
+      });
+    }
+  });
 
   return (
     <li
@@ -64,7 +78,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
         {todo.completed.status == false && (
           <span className={appStyles.textEdit} onClick={handleEdit}>
             <Edit />
-            <p>Edit</p>
+            <p>{todo.editing ? "Save" : "Edit"}</p>
           </span>
         )}
       </div>
