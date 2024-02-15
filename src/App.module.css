@@ -118,6 +118,15 @@
 .todo:hover {
   border-color: var(--main-b22);
 }
+.todo .textEdit p {
+  color: var(--main-b22);
+  margin: 0;
+  padding: var(--cor-txt-t);
+  transition: 0.2s ease-in-out;
+}
+.textEdit:hover p {
+  color: var(--main-b);
+}
 .todo:hover .textEdit {
   opacity: 1;
 }
@@ -146,14 +155,17 @@
   align-items: center;
   justify-content: center;
 
-  width: 20px;
-  min-width: 20px;
+  /* width: 20px; */
+  /* min-width: 20px; */
   height: 20px;
   min-height: 20px;
 
   opacity: 0;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+.textEdit > *:not(:last-child) {
+  margin-right: 5px;
 }
 .textEdit:hover {
   opacity: 1;

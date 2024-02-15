@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import { Edit, Complete, Delete } from "../SVG";
-import { getTodos, saveTodo } from "../../uitls";
+import { getTodos, saveTodo, todoFocus } from "../../uitls";
 
 export function Todo({ appStyles, initialTodo, setTodos }) {
   const [todo, setTodo] = useState(initialTodo);
   const textRef = useRef(null);
+
+  console.log("render Todo");
 
   const handleComplete = () => {
     setTodo((todo) => {
@@ -39,6 +41,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
       });
       const nextTodos = [...filteredTodos];
       saveTodo(nextTodos);
+      todoFocus(textRef.current);
       return nextTodo;
     });
   };
@@ -54,12 +57,14 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
           className={appStyles.text}
           contentEditable={todo.editing}
           suppressContentEditableWarning={true}
+          tabIndex={-1}
         >
           {todo.text}
         </p>
         {todo.completed.status == false && (
           <span className={appStyles.textEdit} onClick={handleEdit}>
             <Edit />
+            <p>Edit</p>
           </span>
         )}
       </div>

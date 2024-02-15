@@ -34,3 +34,9 @@ export const getTodos = () => {
 export const isEmptyTodos = () => {
   return !getTodos();
 };
+
+export const todoFocus = (todo) => {
+  setTimeout(() => {
+    todo.focus();
+  }, 0);
+};

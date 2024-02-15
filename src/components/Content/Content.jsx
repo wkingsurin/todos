@@ -1,10 +1,17 @@
 import { Todo } from "../Todo/Todo";
 import { InputTodo } from "../Todo/InputTodo";
 import { useState, useEffect } from "react";
-import { getTodos } from "../../uitls";
+import { getTodos, saveTodo } from "../../uitls";
 
 export default function Content({ appStyles }) {
   const [todos, setTodos] = useState([]);
+
+  window.addEventListener("unload", () => {
+    const nextTodos = getTodos().map((todo) => {
+      return { ...todo, editing: false };
+    });
+    saveTodo(nextTodos);
+  });
 
   useEffect(() => {
     if (getTodos()) {
