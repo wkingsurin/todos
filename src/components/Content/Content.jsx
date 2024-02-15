@@ -12,14 +12,16 @@ export default function Content({ appStyles }) {
     }
   }, []);
 
-  const todosList = todos.map((todo) => (
-    <Todo
-      key={todo.text}
-      appStyles={appStyles}
-      text={todo.text}
-      setTodos={setTodos}
-    />
-  ));
+  const todosList = todos.map((todo) => {
+    return (
+      <Todo
+        key={todo.id}
+        appStyles={appStyles}
+        initialTodo={todo}
+        setTodos={setTodos}
+      />
+    );
+  });
 
   return (
     <div className={appStyles.content}>

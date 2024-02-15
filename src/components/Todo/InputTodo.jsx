@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { emptyTodo, saveTodo, getTodos, isEmptyTodos } from "../../uitls";
+import {
+  emptyTodo,
+  saveTodo,
+  getTodos,
+  isEmptyTodos,
+  getRandomId,
+} from "../../uitls";
 
 export function InputTodo({ appStyles, setTodos }) {
   const { newTodo, input, save } = appStyles;
-  const [inputTodo, setInputTodo] = useState(emptyTodo);
+  const [inputTodo, setInputTodo] = useState({
+    ...emptyTodo,
+    id: getRandomId(),
+  });
 
   const handleInput = (e) => {
     setInputTodo(() => ({ ...inputTodo, text: e.target.value }));
@@ -14,11 +23,11 @@ export function InputTodo({ appStyles, setTodos }) {
 
     if (isEmptyTodos()) {
       saveTodo([inputTodo]);
-      setInputTodo(emptyTodo);
+      setInputTodo({ ...emptyTodo, id: getRandomId() });
       setTodos(getTodos());
     } else {
       saveTodo([...getTodos(), inputTodo]);
-      setInputTodo(emptyTodo);
+      setInputTodo({ ...emptyTodo, id: getRandomId() });
       setTodos(getTodos());
     }
   };

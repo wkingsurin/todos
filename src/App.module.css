@@ -133,6 +133,11 @@
   padding: var(--cor-txt-t);
   margin: 0;
   box-sizing: border-box;
+
+  color: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 .textEdit {
   display: flex;

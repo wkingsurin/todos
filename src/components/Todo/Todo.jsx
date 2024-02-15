@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Edit, Complete, Delete } from "../SVG";
-import { emptyTodo, getTodos, saveTodo } from "../../uitls";
+import { getTodos, saveTodo } from "../../uitls";
 
-export function Todo({ appStyles, text, setTodos }) {
-  const [todo, setTodo] = useState({ ...emptyTodo, text: text });
+export function Todo({ appStyles, initialTodo, setTodos }) {
+  const [todo, setTodo] = useState(initialTodo);
+  const textRef = useRef(null);
 
   const handleComplete = () => {
-    setTodo((todo) => ({
-      ...todo,
-      completed: { ...todo.completed, status: true },
-    }));
+    setTodo((todo) => {
+      let nextTodo = {
+        ...todo,
+        completed: { ...todo.completed, status: true },
+      };
+      const nextTodos = getTodos().map((t) =>
+        t.id == nextTodo.id ? nextTodo : t
+      );
+      saveTodo(nextTodos);
+      return nextTodo;
+    });
   };
 
   const handleDelete = () => {
@@ -18,15 +26,38 @@ export function Todo({ appStyles, text, setTodos }) {
     saveTodo(nextTodos);
   };
 
+  const handleEdit = () => {
+    setTodo((todo) => {
+      let nextTodo = {
+        ...todo,
+        editing: !todo.editing,
+        text: textRef.current.innerHTML,
+      };
+      const filteredTodos = getTodos().map((t) => {
+        return t.id === nextTodo.id ? nextTodo : t;
+      });
+      const nextTodos = [...filteredTodos];
+      saveTodo(nextTodos);
+      return nextTodo;
+    });
+  };
+
   return (
     <li
       className={appStyles.todo}
       style={(todo.completed.status && todo.completed.theme) || {}}
     >
       <div className={appStyles.textBlock}>
-        <p className={appStyles.text}>{todo.text}</p>
+        <p
+          ref={textRef}
+          className={appStyles.text}
+          contentEditable={todo.editing}
+          suppressContentEditableWarning={true}
+        >
+          {todo.text}
+        </p>
         {todo.completed.status == false && (
-          <span className={appStyles.textEdit}>
+          <span className={appStyles.textEdit} onClick={handleEdit}>
             <Edit />
           </span>
         )}
