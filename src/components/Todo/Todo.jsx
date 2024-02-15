@@ -75,7 +75,9 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
         >
           {todo.text}
         </p>
-        {todo.completed.status == false && (
+        {todo.completed.status ? (
+          <p className={appStyles.completed}>Completed</p>
+        ) : (
           <span className={appStyles.textEdit} onClick={handleEdit}>
             <Edit />
             <p>{todo.editing ? "Save" : "Edit"}</p>

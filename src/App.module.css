@@ -118,6 +118,13 @@
 .todo:hover {
   border-color: var(--main-b22);
 }
+.completed {
+  font-size: 14px;
+
+  margin: 0;
+  color: var(--bord-color);
+  padding: var(--cor-txt-t);
+}
 .todo .textEdit p {
   color: var(--main-b22);
   margin: 0;
@@ -159,6 +166,7 @@
   /* min-width: 20px; */
   height: 20px;
   min-height: 20px;
+  font-size: 14px;
 
   opacity: 0;
   cursor: pointer;
