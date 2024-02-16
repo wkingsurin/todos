@@ -45,6 +45,10 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
   };
 
   document.addEventListener("keydown", (e) => {
+    const isEditing =
+      getTodos().filter((t) => (t.editing ? true : false)).length > 0;
+    if (!isEditing) return;
+
     if (e.key == "Enter") {
       setTodo((todo) => {
         let nextTodo = {
