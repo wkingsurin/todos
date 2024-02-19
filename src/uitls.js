@@ -9,18 +9,9 @@ export const emptyTodo = {
   editing: false,
 };
 
-export function getRandomId() {
-  const id =
-    "#" +
-    getRandomNumber(0, 9) +
-    getRandomNumber(0, 9) +
-    getRandomNumber(0, 9) +
-    getRandomNumber(0, 9);
+export function getId() {
+  const id = Date.now();
   return id;
-}
-
-export function getRandomNumber(min, max) {
-  return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
 export const saveTodo = (toSave) => {
@@ -28,7 +19,12 @@ export const saveTodo = (toSave) => {
 };
 
 export const getTodos = () => {
-  return JSON.parse(localStorage.getItem("todos"));
+  try {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    return todos;
+  } catch (err) {
+    localStorage.clear();
+  }
 };
 
 export const isEmptyTodos = () => {

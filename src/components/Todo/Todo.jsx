@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Edit, Complete, Delete } from "../SVG";
 import { getTodos, saveTodo, todoFocus } from "../../uitls";
 
@@ -44,25 +44,27 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
     });
   };
 
-  document.addEventListener("keydown", (e) => {
-    const isEditing =
-      getTodos().filter((t) => (t.editing ? true : false)).length > 0;
-    if (!isEditing) return;
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      const isEditing =
+        getTodos().filter((t) => (t.editing ? true : false)).length > 0;
+      if (!isEditing) return;
 
-    if (e.key == "Enter") {
-      setTodo((todo) => {
-        let nextTodo = {
-          ...todo,
-          editing: false,
-          text: textRef.current.textContent.trim(),
-        };
-        const filteredTodos = getTodos().filter((t) => t.id !== nextTodo.id);
-        const nextTodos = [...filteredTodos, nextTodo];
-        saveTodo(nextTodos);
-        return nextTodo;
-      });
-    }
-  });
+      if (e.key == "Enter") {
+        setTodo((todo) => {
+          let nextTodo = {
+            ...todo,
+            editing: false,
+            text: textRef.current.textContent.trim(),
+          };
+          const filteredTodos = getTodos().filter((t) => t.id !== nextTodo.id);
+          const nextTodos = [...filteredTodos, nextTodo];
+          saveTodo(nextTodos);
+          return nextTodo;
+        });
+      }
+    });
+  }, []);
 
   return (
     <li

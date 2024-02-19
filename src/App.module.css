@@ -147,6 +147,7 @@
 }
 .text {
   font-size: 18px;
+  overflow-wrap: anywhere;
 
   margin: 0;
   box-sizing: border-box;

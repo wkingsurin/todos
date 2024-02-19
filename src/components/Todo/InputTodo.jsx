@@ -4,14 +4,14 @@ import {
   saveTodo,
   getTodos,
   isEmptyTodos,
-  getRandomId,
+  getId,
 } from "../../uitls";
 
 export function InputTodo({ appStyles, setTodos }) {
   const { newTodo, input, save } = appStyles;
   const [inputTodo, setInputTodo] = useState({
     ...emptyTodo,
-    id: getRandomId(),
+    id: getId(),
   });
   const inputRef = useRef(null);
 
@@ -33,11 +33,11 @@ export function InputTodo({ appStyles, setTodos }) {
 
     if (isEmptyTodos()) {
       saveTodo([inputTodo]);
-      setInputTodo({ ...emptyTodo, id: getRandomId() });
+      setInputTodo({ ...emptyTodo, id: getId() });
       setTodos(getTodos());
     } else {
       saveTodo([...getTodos(), inputTodo]);
-      setInputTodo({ ...emptyTodo, id: getRandomId() });
+      setInputTodo({ ...emptyTodo, id: getId() });
       setTodos(getTodos());
     }
   };

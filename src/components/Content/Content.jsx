@@ -6,17 +6,17 @@ import { getTodos, saveTodo } from "../../uitls";
 export default function Content({ appStyles }) {
   const [todos, setTodos] = useState([]);
 
-  window.addEventListener("unload", () => {
-    const nextTodos = getTodos().map((todo) => {
-      return { ...todo, editing: false };
-    });
-    saveTodo(nextTodos);
-  });
-
   useEffect(() => {
     if (getTodos()) {
       setTodos(() => [...getTodos()]);
     }
+
+    window.addEventListener("unload", () => {
+      const nextTodos = getTodos().map((todo) => {
+        return { ...todo, editing: false };
+      });
+      saveTodo(nextTodos);
+    });
   }, []);
 
   const todosList = todos.map((todo) => {
