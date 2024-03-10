@@ -1,47 +1,48 @@
-import { useState, useEffect, useRef } from "react";
+import { useReducer, useEffect, useRef } from "react";
 import { Edit, Complete, Delete } from "../SVG";
 import { getTodos, saveTodo, todoFocus } from "../../uitls";
+import { todoReducer } from "./todoReducer";
 
 export function Todo({ appStyles, initialTodo, setTodos }) {
-  const [todo, setTodo] = useState(initialTodo);
+  const [todo, dispatch] = useReducer(todoReducer, initialTodo);
   const textRef = useRef(null);
 
   const handleComplete = () => {
-    setTodo((todo) => {
-      let nextTodo = {
-        ...todo,
-        completed: { ...todo.completed, status: true },
-        editing: false,
-      };
-      const nextTodos = getTodos().map((t) =>
-        t.id == nextTodo.id ? nextTodo : t
-      );
-      saveTodo(nextTodos);
-      return nextTodo;
+    dispatch({
+      type: "completed",
+      todos: getTodos(),
+      saveTodo: saveTodo,
     });
   };
 
   const handleDelete = () => {
-    const nextTodos = getTodos().filter((t) => t.id !== todo.id);
-    setTodos(nextTodos);
-    saveTodo(nextTodos);
+    dispatch({
+      type: "deleted",
+      todos: getTodos(),
+      saveTodo: saveTodo,
+      setTodos: setTodos,
+    });
   };
 
   const handleEdit = () => {
-    setTodo((todo) => {
-      let nextTodo = {
-        ...todo,
-        editing: !todo.editing,
-        text: textRef.current.textContent.trim(),
-      };
-      const filteredTodos = getTodos().map((t) => {
-        return t.id === nextTodo.id ? nextTodo : t;
-      });
-      const nextTodos = [...filteredTodos];
-      saveTodo(nextTodos);
-      todoFocus(textRef.current);
-      return nextTodo;
+    dispatch({
+      type: "edited",
+      textRef: textRef,
+      todos: getTodos(),
+      saveTodo: saveTodo,
+      todoFocus: todoFocus,
     });
+  };
+
+  const handleEnterPress = (e) => {
+    if (e.key == "Enter") {
+      dispatch({
+        type: "pressed_enter",
+        textRef: textRef,
+        todos: getTodos(),
+        saveTodo: saveTodo,
+      });
+    }
   };
 
   useEffect(() => {
@@ -50,19 +51,7 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
         getTodos().filter((t) => (t.editing ? true : false)).length > 0;
       if (!isEditing) return;
 
-      if (e.key == "Enter") {
-        setTodo((todo) => {
-          let nextTodo = {
-            ...todo,
-            editing: false,
-            text: textRef.current.textContent.trim(),
-          };
-          const filteredTodos = getTodos().filter((t) => t.id !== nextTodo.id);
-          const nextTodos = [...filteredTodos, nextTodo];
-          saveTodo(nextTodos);
-          return nextTodo;
-        });
-      }
+      handleEnterPress(e);
     });
   }, []);
 
