@@ -11,12 +11,18 @@ export default function Content({ appStyles }) {
       setTodos(() => [...getTodos()]);
     }
 
-    window.addEventListener("unload", () => {
+    const handleUnload = () => {
       const nextTodos = getTodos().map((todo) => {
         return { ...todo, editing: false };
       });
       saveTodo(nextTodos);
-    });
+    };
+
+    window.addEventListener("unload", handleUnload);
+
+    return () => {
+      window.removeEventListener("unload", handleUnload);
+    };
   }, []);
 
   const todosList = todos.map((todo) => {

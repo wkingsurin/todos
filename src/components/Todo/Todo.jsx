@@ -46,13 +46,19 @@ export function Todo({ appStyles, initialTodo, setTodos }) {
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
+    const handleKeydown = (e) => {
       const isEditing =
         getTodos().filter((t) => (t.editing ? true : false)).length > 0;
       if (!isEditing) return;
 
       handleEnterPress(e);
-    });
+    };
+
+    document.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeydown);
+    };
   }, []);
 
   return (
